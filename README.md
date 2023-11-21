@@ -41,10 +41,9 @@ O arquivo `docker-compose.yml` define os serviços Docker a serem utilizados. S�
    ```
 
 4. Abra um navegador e acesse:
-   - <http://localhost> para visualizar a página inicial do NGINX.
-   - red.127.0.0.1.nip.io: o servidor `red`responderá à requisição. (proxy reverso)
-   - blue.127.0.0.1.nip.io: o servidor `blue`responderá à requisição. (proxy reverso)
-   - api.127.0.0.1.nip.io As requisições serão balanceadas entre os servidores `green` e `aqua`. Caso eles parem de funcionar, o servidor `silver` assumirá. (balanceador de carga)
+  - `red.127.0.0.1.nip.io`: o nginx direciona a requisição para o servidor red (proxy reverso)
+  - `blue.127.0.0.1.nip.io`: o nginx direciona  a requisição para o servidor blue (proxy reverso)
+  - `api.127.0.0.1.nip.io`: o nginx direciona a requisição para o servidores  green, aqua. Caso os dois parem de responder, a requisição é direcionada ao servidor black (balanceador de carga)
 
 ## Configuração personalizada
 
