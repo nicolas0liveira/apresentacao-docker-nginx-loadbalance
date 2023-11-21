@@ -1,0 +1,4 @@
+postgres/data/
+nodered/data/.config.*
+**/*.conf
+**/*.log

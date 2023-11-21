@@ -1,0 +1,82 @@
+#ver os ips dos dockers: 
+# docker inspect -f '{{.Name}} - {{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $(docker ps -q)
+
+# Start the app using docker-compose pull && docker-compose up to make sure you have the latest image
+version: '3.9' #https://docs.docker.com/compose/compose-file/compose-file-v3/
+
+networks:
+  nginxnet:
+    driver: bridge
+
+#https://docs.nginx.com/nginx/admin-guide/
+services:
+  nginx:
+    container_name: nginx
+    hostname: nginx
+    restart: unless-stopped
+    image: nginx:latest
+    ports:
+      - "80:80"
+      - "443:443"
+    networks:
+      - nginxnet
+    
+    volumes:
+      - ./entrypoint.sh:/usr/local/bin/entrypoint.sh
+      - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./cert:/cert
+      - ./global_ssl.conf:/etc/nginx/ssl/global_ssl.conf
+    
+    entrypoint: /usr/local/bin/entrypoint.sh
+
+  red:
+    container_name: red
+    image: nicolas0liveira/pingcolorapp:latest 
+    command: "--color=red"
+    # as portas estão desabilitadas para que esse container não seja acessível de fora da rede docker
+    # ou seja, todo acesso deverá ocorrer por meio do NGINX.
+    # caso queira, descomente e teste acessá-la diretamente.
+
+    # ports:
+    #   - '8081:8080'
+
+    networks:
+      - nginxnet
+
+  blue:
+    container_name: blue
+    image: nicolas0liveira/pingcolorapp:latest 
+    command: "--color=blue"
+    # ports:
+    #   - '8082:8080'
+    networks:
+      - nginxnet
+
+
+ # instancias para o api.meudominio.com
+  green:
+    container_name: green
+    image: nicolas0liveira/pingcolorapp:latest 
+    command: "--color=green"
+    # ports:
+    #   - '8083:8080'
+    networks:
+      - nginxnet
+
+  aqua:
+    container_name: aqua
+    image: nicolas0liveira/pingcolorapp:latest 
+    command: "--color=aqua"
+    # ports:
+    #   - '8084:8080'
+    networks:
+      - nginxnet
+
+  silver:
+    container_name: silver
+    image: nicolas0liveira/pingcolorapp:latest 
+    command: "--color=silver"
+    # ports:
+    #   - '8085:8080'
+    networks:
+      - nginxnet
