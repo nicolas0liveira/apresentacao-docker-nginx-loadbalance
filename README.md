@@ -62,18 +62,20 @@ O arquivo `docker-compose.yml` define os serviços Docker a serem utilizados. S�
 A título de curiosidade, foi utilizado o serviço `nip.io` para uso do DNS, dispensando as costumeiras alterações no arquivo `/etc/hosts`.
 Exemplos:
 
-- 127.0.0.1.nip.io direciona para **127.0.0.1**
+- `127.0.0.1.nip.io` direciona para **127.0.0.1**
   - a requisição é tratada diretamente pelo nginx
-- red.127.0.0.1.nip.io direciona para **127.0.0.1**
+- `red.127.0.0.1.nip.io` direciona para **127.0.0.1**
   - a requisição o nginx direciona para o servidor red
-- api.127.0.0.1.nip.io direciona para **127.0.0.1**
+- `api.127.0.0.1.nip.io` direciona para **127.0.0.1**
   - a requisição o nginx direciona para o servidores  green, aqua. Caso os dois parem de responder, a requisição é direcionada ao servidor black
 
 Como se trata de uma introdução ao NGINX e Docker, que foi executada de forma pontual e rápida, certamente existem muitas configurações que precisam melhorar. Não houve preocupação com segurança e alguns parâmetros de performance.
 
+<!-- 
 ## Screenshots
 
-<!-- ![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here) -->
+![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here) 
+-->
 
 ## Roadmap
 
